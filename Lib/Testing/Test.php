@@ -18,12 +18,12 @@ class Test
         echo "testMovieRenaming\n";
 
         $names = array(
-            "Awful Nice 2013 WEBRip 480p X264 AAC-VYTO [P2PDL] [P2PDL]",
-            "Craig.Ferguson.Im.Here.To.Help.2013.DVDRip.x264-GUFFAW",
-            "Ender's Game 2013 BluRay 720p DTS x264-MgB [ETRG]",
-            "Mr. And Mrs. Smith 2005 Dir Cut BluRay 720p DTS x264-3Li",
-            "Mr.+And+Mrs.+Smith+2005+Dir+Cut+BluRay+720p+DTS+x264-3Li",
-            "Thor The Dark World [2013] 1080p BluRay AAC x264-tomcat12[ETRG]"
+            "A Test 2001 WEBRip 480p X264 AAB-CCD [ARG1] [ARG2]",
+            "A.Test.With.Dots.2002.DVDRip.x264-AAB",
+            "Aren't There Test with quotes 2003 BluRay 720p DTS x264-AAB [AAC]",
+            "Dot. And Dot. Test 2004 Dir Cut BluRay 720p DTS x264-4YOU",
+            "Dot.+And+Dot.+Test+2005+Dir+Cut+BluRay+720p+DTS+x264-4YOU",
+            "A Test With A Different Year Block [2006] 1080p BluRay AAC x264-aab [ARG1]"
         );
 
         foreach ($names as $name) {
