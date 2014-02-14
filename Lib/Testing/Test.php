@@ -3,14 +3,13 @@
 namespace Lib\Testing;
 
 use Lib\Movie;
-use Lib\XBMC;
+use Lib\UpdateContext;
 
 class Test
 {
     public function run()
     {
         $this->testMovieRenaming();
-        $this->testUpdateXBMC();
     }
 
     public function testMovieRenaming()
@@ -30,20 +29,7 @@ class Test
             $movie = new Movie();
             $movie->setFileName($name);
 
-            echo $movie->getDirectoryName() . "\n";
-        }
-    }
-
-    public function testUpdateXBMC()
-    {
-        echo "testUpdateXBMC\n";
-
-        try {
-            $xbmc = new XBMC();
-            $xbmc->setUpdateMovies(true);
-            $xbmc->update();
-        } catch (\Exception $e) {
-            echo $e->getMessage();
+            echo $movie->getTargetDirectory() . "\n";
         }
     }
 }

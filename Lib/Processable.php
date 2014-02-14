@@ -140,7 +140,7 @@ abstract class Processable
         return null;
     }
 
-    public abstract function process(XBMC $context);
+    public abstract function process(UpdateContext $context);
 
     protected function clean()
     {

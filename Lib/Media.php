@@ -9,28 +9,22 @@ use Lib\Utility\Logger;
  */
 abstract class Media extends Processable
 {
+    protected abstract function moveFiles();
 
-    public final function process(XBMC $context)
+    public abstract function getTargetDirectory();
+
+    public final function process(UpdateContext $context)
     {
         Logger::log("Processing download: {$this->getFileName()}");
 
         try {
             $this->moveFiles();
             $this->clean();
-
-            if ($this instanceof TVShow || $this instanceof Movie) {
-                $context->setUpdateMovies(true);
-            }
-
-            if ($this instanceof Movie) {
-                $context->setUpdateMusic(true);
-            }
+            $context->addMedia($this);
 
         } catch (\Exception $e) {
             Logger::log("Error : {$e->getMessage()}");
         }
     }
-
-    protected abstract function moveFiles();
 }
 

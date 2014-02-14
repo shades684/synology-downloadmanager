@@ -7,32 +7,39 @@ use Lib\Utility\Logger;
 use Lib\Web\WebClient;
 
 /**
- * Updates XBMC
+ * Updates XBMC and Indexing of Synology
  */
-class XBMC
+class UpdateContext
 {
-    private $updateMovies = false;
-    private $updateMusic = false;
-
     /**
-     * @param boolean $updateMovies
+     * @var Media[] $medias
      */
-    public function setUpdateMovies($updateMovies)
-    {
-        $this->updateMovies = $updateMovies;
-    }
+    protected $medias = array();
 
-    /**
-     * @param boolean $updateMusic
-     */
-    public function setUpdateMusic($updateMusic)
+    public function addMedia(Media $media)
     {
-        $this->updateMusic = $updateMusic;
+        $this->medias[] = $media;
     }
 
     public function update()
     {
+        $updateMovies = false;
+        $updateMusic = false;
+
         $configuration = Configuration::getInstance();
+
+        foreach ($this->medias as $media) {
+
+            exec('synoindex -A ' . $media->getTargetDirectory());
+
+            if ($media instanceof TVShow || $media instanceof Movie) {
+                $updateMovies = true;
+            }
+
+            if ($media instanceof Music) {
+                $updateMusic = true;
+            }
+        }
 
         if ($configuration->get('post-process/xbmc/enabled', false)) {
 
@@ -50,15 +57,15 @@ class XBMC
 
                 Logger::log("Notifying on $url");
 
-                if (!$this->updateMovies && !$this->updateMusic) {
+                if (!$updateMovies && !$updateMusic) {
                     Logger::log("No new media was added, skipping update process");
                 }
 
-                if ($this->updateMovies) {
+                if ($updateMovies) {
                     $webClient->get($url . '/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.Scan"}');
                 }
 
-                if ($this->updateMusic) {
+                if ($updateMusic) {
                     $webClient->get($url . '/jsonrpc?request={"jsonrpc":"2.0","method":"AudioLibrary.Scan"}');
                 }
             } catch (\Exception $e) {

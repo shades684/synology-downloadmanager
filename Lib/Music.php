@@ -11,4 +11,9 @@ class Music extends Media
     {
         throw new \Exception('Music not Implemented');
     }
+
+    public function getTargetDirectory()
+    {
+        throw new \Exception('Target directory for Music not Implemented');
+    }
 }

@@ -7,7 +7,7 @@ namespace Lib;
  */
 class Archive extends Processable
 {
-    public function process(XBMC $context)
+    public function process(UpdateContext $context)
     {
         //unpack
         //new processable::getByDirectory(targetDirectory)

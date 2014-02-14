@@ -11,4 +11,9 @@ class TVShow extends Media
     {
         throw new \Exception('TVShow not Implemented');
     }
+
+    public function getTargetDirectory()
+    {
+        throw new \Exception('Target directory for TVShow not Implemented');
+    }
 }

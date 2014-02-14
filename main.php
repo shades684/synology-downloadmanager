@@ -8,7 +8,7 @@ use Lib\Utility\BigFileTools;
 use Lib\Utility\Configuration;
 use Lib\Utility\Logger;
 use Lib\Utility\SplClassLoader;
-use Lib\XBMC;
+use Lib\UpdateContext;
 
 require_once('Lib/Utility/SplClassLoader.php');
 $classLoader = new SplClassLoader('Lib', __DIR__);
@@ -34,7 +34,7 @@ if ($argc > 1) {
 Logger::log("Starting download handling");
 
 try {
-    $context = new XBMC();
+    $context = new UpdateContext();
     $processed = array();
     $downloads = Download::getCompleted();
 

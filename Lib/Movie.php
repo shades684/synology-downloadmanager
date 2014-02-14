@@ -15,9 +15,7 @@ class Movie extends Media
 
     protected function moveFiles()
     {
-        $configuration = Configuration::getInstance();
-
-        $directoryName = $configuration->get('target/movie') . '/' . $this->getDirectoryName();
+        $directoryName = $this->getTargetDirectory();
         Logger::log("Parsed torrent, decided on directory: {$directoryName}");
 
         $fileOrigin = $this->getFile();
@@ -42,8 +40,10 @@ class Movie extends Media
         }
     }
 
-    public function getDirectoryName()
+    public function getTargetDirectory()
     {
+        $configuration = Configuration::getInstance();
+
         preg_match('/^(.*?)[\W]+([0-9]{4}).*$/', $this->getFileName(), $matches);
 
         if (sizeof($matches) < 3) {
@@ -59,7 +59,7 @@ class Movie extends Media
             }
         }
 
-        return implode(' ', $words) . " ($matches[2])";
+        return $configuration->get('target/movie') . '/' . implode(' ', $words) . " ($matches[2])";
     }
 
     private function getFile()

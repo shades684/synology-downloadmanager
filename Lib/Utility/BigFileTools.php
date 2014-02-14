@@ -168,7 +168,7 @@ class BigFileTools
      */
     function getPath($a = "")
     {
-        if (a != "") {
+        if ($a != "") {
             trigger_error("getPath with absolutizing argument is deprecated!", E_USER_DEPRECATED);
         }
 
