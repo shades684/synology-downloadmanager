@@ -3,6 +3,7 @@
 
 use Lib\Download;
 use Lib\Processable;
+use Lib\Setup;
 use Lib\Testing\Test;
 use Lib\Utility\BigFileTools;
 use Lib\Utility\Configuration;

@@ -4,6 +4,7 @@ namespace Lib;
 
 use Lib\Utility\BigFileTools;
 use Lib\Utility\Configuration;
+use Lib\Utility\File;
 use Lib\Utility\Logger;
 
 /**
@@ -148,7 +149,7 @@ abstract class Processable
 
         if ($configuration->get('post-process/clean/files', false)) {
             Logger::log("Removing downloaded files");
-            $this->delTree($this->getOriginDirectory());
+            File::delTree($this->getOriginDirectory());
         }
 
         $configuration = Configuration::getInstance();
@@ -157,16 +158,6 @@ abstract class Processable
             Logger::log("Removing download from database");
             $this->download->delete();
         }
-    }
-
-    private function delTree($dir)
-    {
-        $files = array_diff(scandir($dir), array('.', '..'));
-        foreach ($files as $file) {
-            (is_dir("$dir/$file")) ? $this->delTree("$dir/$file") : unlink("$dir/$file");
-        }
-
-        return rmdir($dir);
     }
 
     /**

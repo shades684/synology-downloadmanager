@@ -2,6 +2,7 @@
 
 namespace Lib\Testing;
 
+use Lib\Download;
 use Lib\Movie;
 use Lib\UpdateContext;
 
@@ -9,7 +10,16 @@ class Test
 {
     public function run()
     {
+        $this->testDb();
         $this->testMovieRenaming();
+    }
+
+    public function testDb()
+    {
+        foreach(Download::getCompleted() as $download)
+        {
+            echo $download->getFileName(). "\n";
+        }
     }
 
     public function testMovieRenaming()

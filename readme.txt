@@ -9,22 +9,9 @@ Optionally
     XBMC is notified that new movies and/or music has been added.
 
 INSTALL:
-     PHP scripts can only access the internal database if they're placed in /usr/syno/synoman/phpsrc a good place would be /usr/syno/synoman/phpsrc/DownloadManager/
-     don't forget to make the main.php executable chmod guo+x main.php
-     change config.json to your wishes
-
-     Add target directories to open_basedir in the Webservices - PHP settings of the configuration screen
-
-     stop download station
-        /volume1/@appstore/DownloadStation/scripts/S25download.sh stop
-     edit /usr/syno/etc/packages/DownloadStation/download/settings.json
-        set "script-torrent-done-enabled" to true
-        set "script-torrent-done-filename" to /usr/syno/synoman/phpsrc/DownloadManager/main.php
-     start download station
-        /volume1/@appstore/DownloadStation/scripts/S25download.sh start
-
-FAQ:
-    Does the download in /volume1/@download/task_id get removed? : YES (though not immediately)
+    Change config.json to your wishes
+    Add directories to open_basedir in the Webservices - PHP settings of the configuration screen (/volume1/video, /volume1/music and /volume1/downloads for instance)
+    run setup.sh
 
 TODO:
     Implement Archive
