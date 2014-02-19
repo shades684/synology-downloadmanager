@@ -13,6 +13,7 @@ class Query
 
     public function getResult()
     {
-        return pg_fetch_all($this->resource);
+        $data = pg_fetch_all($this->resource);
+        return empty($data) ? array() : $data;
     }
 }

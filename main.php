@@ -1,4 +1,4 @@
-#!/usr/syno/bin/php
+#!/usr/bin/php
 <?php
 
 use Lib\Download;
