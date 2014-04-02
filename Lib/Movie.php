@@ -32,7 +32,7 @@ class Movie extends Media
             chgrp($directoryName, 'users');
 
             Logger::log("Copying file: {$fileOrigin} to {$fileTarget}");
-            copy($fileOrigin, $fileTarget);
+            system("cp " . escapeshellarg($fileOrigin) . " " . escapeshellarg($fileTarget));
             chown($fileTarget, $this->getUserName());
             chgrp($fileTarget, 'users');
         } else {

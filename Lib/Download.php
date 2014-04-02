@@ -37,7 +37,8 @@ class Download
         $query = $db->query("SELECT task_id, username, status, destination, filename FROM download_queue");
 
         foreach ($query->getResult() as $result) {
-            $lst[] = new Download(intval($result['task_id']), $result['username'], intval($result['status']), $result['destination'], $result['filename']);
+            if (intval($result['status']) == self::STATE_COMPLETE || intval($result['status']) == self::STATE_SEEDING)
+                $lst[] = new Download(intval($result['task_id']), $result['username'], intval($result['status']), $result['destination'], $result['filename']);
         }
 
         return $lst;

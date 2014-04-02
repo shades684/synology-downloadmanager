@@ -30,7 +30,7 @@ class UpdateContext
 
         foreach ($this->medias as $media) {
 
-            exec('synoindex -A ' . $media->getTargetDirectory());
+            system('synoindex -A ' . escapeshellarg($media->getTargetDirectory()));
 
             if ($media instanceof TVShow || $media instanceof Movie) {
                 $updateMovies = true;
